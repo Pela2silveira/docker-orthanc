@@ -1,0 +1,37 @@
+services:
+  orthanc:
+    container_name: orthanc
+    restart: always
+    image: orthancteam/orthanc:26.9.1
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    ports:
+      - "${HTTP_PORT:-8042}:8042"
+      - "${DICOM_PORT:-4242}:4242"
+    env_file: docker-compose.env
+    environment:
+      # Viewers / UI
+      STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
+      OHIF_PLUGIN_ENABLED: "true"
+      ORTHANC_WEB_VIEWER_PLUGIN_ENABLED: "true"
+      ORTHANC_EXPLORER_2_ENABLED: "true"
+      DICOM_WEB_PLUGIN_ENABLED: "true"
+      # Useful for a backup / local archive
+      TRANSFERS_PLUGIN_ENABLED: "true"
+      HOUSEKEEPER_PLUGIN_ENABLED: "true"
+      CONNECTIVITY_CHECKS_PLUGIN_ENABLED: "true"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/local/orthanc/db:/var/lib/orthanc/db
+      - ./conf/orthanc.json:/etc/orthanc/orthanc.json:ro
+      - ./conf/modalities.json:/etc/orthanc/modalities.json:ro
+      - ./conf/http-filter.lua:/etc/orthanc/http-filter.lua:ro
+    healthcheck:
+      test: ["CMD-SHELL", "python3 /probes/test-aliveness.py --user=\"$$ORTHANC_USER\" --password=\"$$ORTHANC_PASSWORD\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

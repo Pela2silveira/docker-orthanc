@@ -1,0 +1,58 @@
+{
+  "Name": "<orthanc-name>",
+  "DicomAet": "<aet>",
+  "DicomPort": 4242,
+  "HttpPort": 8042,
+
+  "RemoteAccessAllowed": true,
+  "AuthenticationEnabled": true,
+  "RegisteredUsers": {
+    "<orthanc-user>": "<orthanc-password>",
+    "<orthanc-viewer-user>": "<orthanc-viewer-password>"
+  },
+
+  "LuaScripts": [
+    "/etc/orthanc/http-filter.lua"
+  ],
+
+  "DicomAlwaysAllowEcho": true,
+  "DicomAlwaysAllowStore": true,
+  "DicomCheckModalityHost": false,
+  "DicomCheckCalledAet": false,
+  "DicomModalitiesInDatabase": true,
+
+  "StableAge": 30,
+  "OverwriteInstances": false,
+  "StorageCompression": false,
+  "MaximumStorageSize": 0,
+  "MaximumPatientCount": 0,
+
+  "HttpTimeout": 60,
+  "HttpDescribeErrors": true,
+  "KeepAlive": true,
+
+  "OrthancExplorer2": {
+    "Enable": true,
+    "IsDefaultOrthancUI": true
+  },
+
+  "DicomWeb": {
+    "Enable": true,
+    "Root": "/dicom-web/",
+    "EnableWado": true,
+    "WadoRoot": "/wado",
+    "Ssl": false,
+    "QidoCaseSensitive": false,
+    "Host": "0.0.0.0",
+    "StudiesMetadata": "MainDicomTags",
+    "SeriesMetadata": "Full"
+  },
+
+  "StoneWebViewer": {
+    "ShowStudyList": true
+  },
+
+  "OHIF": {
+    "DataSource": "dicom-web"
+  }
+}

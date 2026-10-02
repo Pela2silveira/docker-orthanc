@@ -1,0 +1,9 @@
+-- Restrict mutating HTTP methods to the admin user.
+-- Authenticated users can still browse/query via GET/POST (Explorer, DICOMweb, viewers).
+function IncomingHttpRequestFilter(method, uri, ip, username, httpHeaders)
+   if method == 'GET' or method == 'POST' or username == '<admin-user>' then
+      return true
+   else
+      return false
+   end
+end

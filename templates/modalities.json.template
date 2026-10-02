@@ -1,0 +1,9 @@
+{
+  "DicomModalities": {
+    "PACS_PRIMARY": [ "PACS", "pacs.example.local", 11112 ],
+    "CT_SALA1": [ "CTSALA1", "192.168.10.20", 104 ],
+    "MR_SALA1": [ "MRSALA1", "192.168.10.21", 104 ],
+    "US_SALA2": [ "USSALA2", "192.168.10.30", 104 ],
+    "DX_SALA3": [ "DXSALA3", "192.168.10.40", 104 ]
+  }
+}
